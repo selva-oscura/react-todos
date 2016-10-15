@@ -1,0 +1,27 @@
+{
+  "name": "react-todos",
+  "version": "1.0.0",
+  "description": "Todo's project, using React.js, Materialize.css, and Firebase",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selva-oscura/react-todos.git"
+  },
+  "keywords": [
+    "todo",
+    "todos",
+    "react",
+    "react.js",
+    "materialize",
+    "firebase"
+  ],
+  "author": "Carol  Diane  St. Louis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/selva-oscura/react-todos/issues"
+  },
+  "homepage": "https://github.com/selva-oscura/react-todos#readme"
+}
