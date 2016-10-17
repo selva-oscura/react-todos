@@ -21597,7 +21597,6 @@
 						type: "submit",
 						className: "btn-floating btn waves-effect waves-light right teal",
 						onClick: function onClick() {
-							console.log('input.value', input.value);
 							addTodo(input.value);
 							input.value = "";
 						} },
@@ -21628,7 +21627,14 @@
 	  var remove = _ref.remove;
 
 	  var todoList = todos.map(function (todo) {
-	    return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove, check: check });
+	    if (!todo.checked) {
+	      return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove, check: check });
+	    }
+	  });
+	  var doneList = todos.map(function (todo) {
+	    if (todo.checked) {
+	      return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove, check: check });
+	    }
 	  });
 	  return React.createElement(
 	    'div',
@@ -21639,7 +21645,8 @@
 	      React.createElement(
 	        'ul',
 	        { className: 'collection' },
-	        todoList
+	        todoList,
+	        doneList
 	      )
 	    )
 	  );
@@ -21666,7 +21673,6 @@
 	      'span',
 	      { className: 'col s1',
 	        onClick: function onClick() {
-	          console.log('check todo.id', todo.id);
 	          check(todo.id);
 	        } },
 	      React.createElement(
@@ -21688,7 +21694,6 @@
 	        {
 	          className: 'btn-floating btn waves-effect waves-light right red',
 	          onClick: function onClick() {
-	            console.log('remove todo.id', todo.id);
 	            remove(todo.id);
 	          } },
 	        React.createElement(
