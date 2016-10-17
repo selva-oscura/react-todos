@@ -21,7 +21,8 @@ const TodoForm = ({addTodo}) => {
 						console.log('input.value', input.value);
 						addTodo(input.value);
 						input.value = "";
-					}}>
+					}
+				}>
 					<i className="material-icons right">add</i>
 				</button>
 			</div>
