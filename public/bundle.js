@@ -83,7 +83,7 @@
 		_createClass(App, [{
 			key: 'addTodo',
 			value: function addTodo(value) {
-				var todo = { text: value, id: window.id++ };
+				var todo = { text: value, id: window.id++, checked: false };
 				// update data
 				this.state.data.push(todo);
 				// update state
@@ -102,6 +102,17 @@
 				this.setState({ data: remaining });
 			}
 		}, {
+			key: 'toggleChecked',
+			value: function toggleChecked(id) {
+				// update data
+				var todos = this.state.data;
+				todos.map(function (todo) {
+					if (todo.id === id) todo.checked = !todo.checked;
+					return todo;
+				});
+				this.setState({ data: todos });
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return React.createElement(
@@ -111,7 +122,8 @@
 					React.createElement(TodoForm, { addTodo: this.addTodo.bind(this) }),
 					React.createElement(TodoList, {
 						todos: this.state.data,
-						remove: this.removeTodo.bind(this)
+						remove: this.removeTodo.bind(this),
+						check: this.toggleChecked.bind(this)
 					})
 				);
 			}
@@ -21612,21 +21624,12 @@
 
 	var TodoList = function TodoList(_ref) {
 	  var todos = _ref.todos;
+	  var check = _ref.check;
 	  var remove = _ref.remove;
 
-	  // todos === fake data for starting off.....
-	  // var todos = [
-	  //   'learn React',
-	  //   'look into this.state',
-	  //   'learn Flux',
-	  //   'integrate app with Firebase',
-	  //   'overthrow small first-world country'
-	  // ].map((todo, index)=> { return {text:todo, id: index}})
-	  // console.log('todos', todos);
 	  var todoList = todos.map(function (todo) {
-	    return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove });
+	    return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove, check: check });
 	  });
-
 	  return React.createElement(
 	    'div',
 	    { className: 'row' },
@@ -21654,17 +21657,22 @@
 
 	var Todo = function Todo(_ref) {
 	  var todo = _ref.todo;
+	  var check = _ref.check;
 	  var remove = _ref.remove;
 	  return React.createElement(
 	    'li',
 	    { className: 'collection-item row' },
 	    React.createElement(
 	      'span',
-	      { className: 'col s1' },
+	      { className: 'col s1',
+	        onClick: function onClick() {
+	          console.log('check todo.id', todo.id);
+	          check(todo.id);
+	        } },
 	      React.createElement(
 	        'i',
 	        { className: 'material-icons left' },
-	        'check_box_outline_blank'
+	        todo.checked ? "check_box" : "check_box_outline_blank"
 	      )
 	    ),
 	    React.createElement(
