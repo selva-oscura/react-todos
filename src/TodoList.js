@@ -1,8 +1,7 @@
 const React = require('react');
 const Todo = require('./Todo.js');
 
-const TodoList = (todos) => {
-  var todoList = [];
+const TodoList = ({todos, remove}) => {
   // todos === fake data for starting off.....
   var todos = [
     'learn React',
@@ -10,10 +9,12 @@ const TodoList = (todos) => {
     'learn Flux',
     'integrate app with Firebase',
     'overthrow small first-world country'
-  ];
-  for(let i = 0; i<todos.length; i++){
-    todoList.push(<Todo key={i} text={todos[i]} />);
-  }
+  ].map((todo, index)=> { return {text:todo, id: index}})
+  console.log('todos', todos);
+  const todoList = todos.map((todo) => {
+		return (<Todo todo={todo} key={todo.id} remove={remove} />);
+	});
+
   return (
     <div className="row">
       <div className="col s12">
