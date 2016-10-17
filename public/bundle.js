@@ -53,13 +53,13 @@
 	var TodoList = __webpack_require__(174);
 
 	var App = function App() {
-		return React.createElement(
-			'div',
-			null,
-			React.createElement(Title, null),
-			React.createElement(TodoForm, null),
-			React.createElement(TodoList, null)
-		);
+	  return React.createElement(
+	    'div',
+	    null,
+	    React.createElement(Title, null),
+	    React.createElement(TodoForm, null),
+	    React.createElement(TodoList, null)
+	  );
 	};
 
 	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
@@ -21470,16 +21470,20 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var Title = function Title() {
-		return React.createElement(
-			'h2',
-			null,
-			'Todo List Name'
-		);
+	  return React.createElement(
+	    "div",
+	    { className: "row" },
+	    React.createElement(
+	      "h2",
+	      { className: "col s12" },
+	      "Todo List Name"
+	    )
+	  );
 	};
 
 	module.exports = Title;
@@ -21493,25 +21497,25 @@
 	var React = __webpack_require__(1);
 
 	var TodoForm = function TodoForm() {
-		return React.createElement(
-			"div",
-			{ className: "row" },
-			React.createElement(
-				"div",
-				{ className: "col s9" },
-				React.createElement("input", { id: "new_todo", type: "text", placeholder: "Things to do....." })
-			),
-			React.createElement(
-				"button",
-				{ className: "btn waves-effect waves-light col s3", id: "submit_todo", type: "submit" },
-				"Add",
-				React.createElement(
-					"i",
-					{ className: "material-icons right" },
-					"send"
-				)
-			)
-		);
+	  return React.createElement(
+	    "div",
+	    { className: "row" },
+	    React.createElement(
+	      "div",
+	      { className: "col s9" },
+	      React.createElement("input", { id: "new_todo", type: "text", placeholder: "Things to do....." })
+	    ),
+	    React.createElement(
+	      "button",
+	      { className: "btn waves-effect waves-light col s3", id: "submit_todo", type: "submit" },
+	      "Add",
+	      React.createElement(
+	        "i",
+	        { className: "material-icons right" },
+	        "send"
+	      )
+	    )
+	  );
 	};
 
 	module.exports = TodoForm;
@@ -21526,16 +21530,24 @@
 	var Todo = __webpack_require__(175);
 
 	var TodoList = function TodoList(props) {
-		var todos = [];
-		var fakeData = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'];
-		for (var i = 0; i < fakeData.length; i++) {
-			todos.push(React.createElement(Todo, { key: i, text: fakeData[i] }));
-		}
-		return React.createElement(
-			'ul',
-			{ className: 'collection' },
-			todos
-		);
+	  var todos = [];
+	  var fakeData = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'];
+	  for (var i = 0; i < fakeData.length; i++) {
+	    todos.push(React.createElement(Todo, { key: i, text: fakeData[i] }));
+	  }
+	  return React.createElement(
+	    'div',
+	    { className: 'row' },
+	    React.createElement(
+	      'div',
+	      { className: 'col s12' },
+	      React.createElement(
+	        'ul',
+	        { className: 'collection' },
+	        todos
+	      )
+	    )
+	  );
 	};
 
 	module.exports = TodoList;
@@ -21549,12 +21561,15 @@
 	var React = __webpack_require__(1);
 
 	var Todo = function Todo(props) {
-		return React.createElement(
-			'li',
-			{ className: 'collection-item' },
-			' ',
-			props.text
-		);
+	  return React.createElement(
+	    'li',
+	    { className: 'collection-item row' },
+	    React.createElement(
+	      'span',
+	      { className: 'col s9 push-s1' },
+	      props.text
+	    )
+	  );
 	};
 
 	module.exports = Todo;

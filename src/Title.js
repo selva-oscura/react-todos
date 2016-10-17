@@ -1,8 +1,9 @@
 const React = require('react');
 
 const Title = () => (
-	<h2>Todo List Name</h2>
+  <div className="row">
+    <h2 className="col s12">Todo List Name</h2>
+  </div>
 )
-
 
 module.exports = Title;

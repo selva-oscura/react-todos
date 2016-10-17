@@ -5,11 +5,11 @@ const TodoForm = require('./TodoForm.js');
 const TodoList = require('./TodoList');
 
 const App = () => (
-	<div>
-		<Title />
-		<TodoForm />
-		<TodoList />
-	</div>
+  <div>
+    <Title />
+    <TodoForm />
+    <TodoList />
+  </div>
 );
 
 ReactDOM.render(<App />, document.getElementById('app'))
