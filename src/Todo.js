@@ -4,7 +4,6 @@ const Todo = ({todo, check, remove}) => (
   <li className='collection-item row'> 
   	<span className="col s1"
   		onClick={() => {
-  			console.log('check todo.id', todo.id);
   			check(todo.id);
   		}
   	}>
@@ -17,7 +16,6 @@ const Todo = ({todo, check, remove}) => (
     	<button
     		className="btn-floating btn waves-effect waves-light right red"
     		onClick={() => {
-    			console.log('remove todo.id', todo.id);
     			remove(todo.id);
 				}
 			}>
