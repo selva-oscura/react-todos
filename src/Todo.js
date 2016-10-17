@@ -8,18 +8,18 @@ const Todo = ({todo, check, remove}) => (
   		}
   	}>
   		<i className="material-icons left">
-  			{todo.checked ? "check_box" : "check_box_outline_blank"}
+  			{todo.checked ? "done" : "check_box_outline_blank"}
   		</i>
   	</span>
     <span className="col s10 push">{todo.text}</span>
     <span className="col s1">
     	<button
-    		className="btn-floating btn waves-effect waves-light right red"
+    		className="btn-floating btn waves-effect waves-light right right red darken-4"
     		onClick={() => {
     			remove(todo.id);
 				}
 			}>
-    		<i className="material-icons right">clear</i>
+    		<i className="material-icons">clear</i>
     	</button>
     </span>
   </li>

@@ -21600,7 +21600,7 @@
 					{
 						id: "submit_todo",
 						type: "submit",
-						className: "btn-floating btn waves-effect waves-light right teal",
+						className: "btn-floating btn waves-effect waves-light right green darken-4",
 						onClick: function onClick() {
 							addTodo(input.value);
 							input.value = "";
@@ -21683,7 +21683,7 @@
 	      React.createElement(
 	        'i',
 	        { className: 'material-icons left' },
-	        todo.checked ? "check_box" : "check_box_outline_blank"
+	        todo.checked ? "done" : "check_box_outline_blank"
 	      )
 	    ),
 	    React.createElement(
@@ -21697,13 +21697,13 @@
 	      React.createElement(
 	        'button',
 	        {
-	          className: 'btn-floating btn waves-effect waves-light right red',
+	          className: 'btn-floating btn waves-effect waves-light right right red darken-4',
 	          onClick: function onClick() {
 	            remove(todo.id);
 	          } },
 	        React.createElement(
 	          'i',
-	          { className: 'material-icons right' },
+	          { className: 'material-icons' },
 	          'clear'
 	        )
 	      )
