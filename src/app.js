@@ -17,7 +17,7 @@ class App extends React.Component{
 	}
 	// add todo handler
 	addTodo(value){
-		const todo = {text: value, id: window.id++}
+		const todo = {text: value, id: window.id++, checked:false}
 		// update data
 		this.state.data.push(todo);
 		// update state
@@ -32,6 +32,15 @@ class App extends React.Component{
 		// update state with filter
 		this.setState({data: remaining});
 	}
+	toggleChecked(id){
+		// update data
+		var todos = this.state.data;
+		todos.map((todo) => {
+			if(todo.id===id) todo.checked = !todo.checked;
+			return todo;
+		});
+		this.setState({data: todos});
+	}
 	render(){	
 		return (
 		  <div>
@@ -40,6 +49,7 @@ class App extends React.Component{
 		    <TodoList 
 		    	todos={this.state.data}
 		    	remove={this.removeTodo.bind(this)}
+		    	check={this.toggleChecked.bind(this)}
 		    />
 		  </div>
 		)
