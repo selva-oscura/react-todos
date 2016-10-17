@@ -1,10 +1,11 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
+const Title = require('./Title.js');
 
-var HelloMessage = React.createClass({
-  render: function () {
-    return <h1>Hello {this.props.message}!</h1>;
-  }
-});
+const App = () => (
+	<div>
+		<Title />
+	</div>
+);
 
-ReactDOM.render(<HelloMessage message="World" />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
