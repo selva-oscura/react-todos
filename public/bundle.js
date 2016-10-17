@@ -21525,7 +21525,7 @@
 						type: "submit",
 						className: "btn-floating btn waves-effect waves-light right teal",
 						onClick: function onClick() {
-							console.log('input.value', input.value, "full node", input);
+							console.log('input.value', input.value);
 							addTodo(input.value);
 							input.value = "";
 						} },
@@ -21550,13 +21550,19 @@
 	var React = __webpack_require__(1);
 	var Todo = __webpack_require__(175);
 
-	var TodoList = function TodoList(todos) {
-	  var todoList = [];
+	var TodoList = function TodoList(_ref) {
+	  var todos = _ref.todos;
+	  var remove = _ref.remove;
+
 	  // todos === fake data for starting off.....
-	  var todos = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'];
-	  for (var i = 0; i < todos.length; i++) {
-	    todoList.push(React.createElement(Todo, { key: i, text: todos[i] }));
-	  }
+	  var todos = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'].map(function (todo, index) {
+	    return { text: todo, id: index };
+	  });
+	  console.log('todos', todos);
+	  var todoList = todos.map(function (todo) {
+	    return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove });
+	  });
+
 	  return React.createElement(
 	    'div',
 	    { className: 'row' },
@@ -21582,14 +21588,43 @@
 
 	var React = __webpack_require__(1);
 
-	var Todo = function Todo(props) {
+	var Todo = function Todo(_ref) {
+	  var todo = _ref.todo;
+	  var remove = _ref.remove;
 	  return React.createElement(
 	    'li',
 	    { className: 'collection-item row' },
 	    React.createElement(
 	      'span',
-	      { className: 'col s9 push-s1' },
-	      props.text
+	      { className: 'col s1' },
+	      React.createElement(
+	        'i',
+	        { className: 'material-icons left' },
+	        'check_box_outline_blank'
+	      )
+	    ),
+	    React.createElement(
+	      'span',
+	      { className: 'col s10 push' },
+	      todo.text
+	    ),
+	    React.createElement(
+	      'span',
+	      { className: 'col s1' },
+	      React.createElement(
+	        'button',
+	        {
+	          className: 'btn-floating btn waves-effect waves-light right red',
+	          onClick: function onClick() {
+	            console.log('remove todo.id', todo.id);
+	            remove(todo.id);
+	          } },
+	        React.createElement(
+	          'i',
+	          { className: 'material-icons right' },
+	          'clear'
+	        )
+	      )
 	    )
 	  );
 	};
