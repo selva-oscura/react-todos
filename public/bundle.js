@@ -21584,8 +21584,13 @@
 					placeholder: "Things to do.....",
 					ref: function ref(node) {
 						input = node;
-					}
-				})
+					},
+					onKeyUp: function onKeyUp(e) {
+						if (e.keyCode === 13) {
+							addTodo(input.value);
+							input.value = "";
+						}
+					} })
 			),
 			React.createElement(
 				"div",

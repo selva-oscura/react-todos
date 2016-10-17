@@ -10,7 +10,13 @@ const TodoForm = ({addTodo}) => {
 					type="text" 
 					placeholder="Things to do....." 
 					ref={node => {input = node;}} 
-				/>
+					onKeyUp={(e) => {
+						if(e.keyCode===13){
+							addTodo(input.value);
+							input.value = "";
+						}
+					}
+				}/>
 			</div>
 			<div className="col s1">
 				<button 
