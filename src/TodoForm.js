@@ -18,7 +18,7 @@ const TodoForm = ({addTodo}) => {
 					type="submit" 
 					className="btn-floating btn waves-effect waves-light right teal" 
 					onClick={() => {
-						console.log('input.value', input.value)
+						console.log('input.value', input.value);
 						addTodo(input.value);
 						input.value = "";
 					}}>

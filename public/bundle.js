@@ -21496,26 +21496,47 @@
 
 	var React = __webpack_require__(1);
 
-	var TodoForm = function TodoForm() {
-	  return React.createElement(
-	    "div",
-	    { className: "row" },
-	    React.createElement(
-	      "div",
-	      { className: "col s9" },
-	      React.createElement("input", { id: "new_todo", type: "text", placeholder: "Things to do....." })
-	    ),
-	    React.createElement(
-	      "button",
-	      { className: "btn waves-effect waves-light col s3", id: "submit_todo", type: "submit" },
-	      "Add",
-	      React.createElement(
-	        "i",
-	        { className: "material-icons right" },
-	        "send"
-	      )
-	    )
-	  );
+	var TodoForm = function TodoForm(_ref) {
+		var addTodo = _ref.addTodo;
+
+		var input = void 0;
+		return React.createElement(
+			"div",
+			{ className: "row" },
+			React.createElement(
+				"div",
+				{ className: "col s11" },
+				React.createElement("input", {
+					id: "text",
+					type: "text",
+					placeholder: "Things to do.....",
+					ref: function ref(node) {
+						input = node;
+					}
+				})
+			),
+			React.createElement(
+				"div",
+				{ className: "col s1" },
+				React.createElement(
+					"button",
+					{
+						id: "submit_todo",
+						type: "submit",
+						className: "btn-floating btn waves-effect waves-light right teal",
+						onClick: function onClick() {
+							console.log('input.value', input.value, "full node", input);
+							addTodo(input.value);
+							input.value = "";
+						} },
+					React.createElement(
+						"i",
+						{ className: "material-icons right" },
+						"add"
+					)
+				)
+			)
+		);
 	};
 
 	module.exports = TodoForm;
@@ -21529,11 +21550,12 @@
 	var React = __webpack_require__(1);
 	var Todo = __webpack_require__(175);
 
-	var TodoList = function TodoList(props) {
-	  var todos = [];
-	  var fakeData = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'];
-	  for (var i = 0; i < fakeData.length; i++) {
-	    todos.push(React.createElement(Todo, { key: i, text: fakeData[i] }));
+	var TodoList = function TodoList(todos) {
+	  var todoList = [];
+	  // todos === fake data for starting off.....
+	  var todos = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'];
+	  for (var i = 0; i < todos.length; i++) {
+	    todoList.push(React.createElement(Todo, { key: i, text: todos[i] }));
 	  }
 	  return React.createElement(
 	    'div',
@@ -21544,7 +21566,7 @@
 	      React.createElement(
 	        'ul',
 	        { className: 'collection' },
-	        todos
+	        todoList
 	      )
 	    )
 	  );
