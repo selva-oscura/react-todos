@@ -48,22 +48,19 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
+	var Title = __webpack_require__(172);
+	var TodoList = __webpack_require__(173);
 
-	var HelloMessage = React.createClass({
-	  displayName: 'HelloMessage',
+	var App = function App() {
+		return React.createElement(
+			'div',
+			null,
+			React.createElement(Title, null),
+			React.createElement(TodoList, null)
+		);
+	};
 
-	  render: function render() {
-	    return React.createElement(
-	      'h1',
-	      null,
-	      'Hello ',
-	      this.props.message,
-	      '!'
-	    );
-	  }
-	});
-
-	ReactDOM.render(React.createElement(HelloMessage, { message: 'World' }), document.getElementById('app'));
+	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21466,6 +21463,67 @@
 
 	module.exports = ReactDOMNullInputValuePropHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Title = function Title() {
+		return React.createElement(
+			'h2',
+			null,
+			'List Name'
+		);
+	};
+
+	module.exports = Title;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Todo = __webpack_require__(174);
+
+	var TodoList = function TodoList(props) {
+		var todos = [];
+		var fakeData = ['learn React', 'look into this.state', 'learn Flux', 'integrate app with Firebase', 'overthrow small first-world country'];
+		for (var i = 0; i < fakeData.length; i++) {
+			todos.push(React.createElement(Todo, { key: i, text: fakeData[i] }));
+		}
+		return React.createElement(
+			'ul',
+			{ className: 'collection' },
+			todos
+		);
+	};
+
+	module.exports = TodoList;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Todo = function Todo(props) {
+		return React.createElement(
+			'li',
+			{ className: 'collection-item' },
+			' ',
+			props.text
+		);
+	};
+
+	module.exports = Todo;
 
 /***/ }
 /******/ ]);
