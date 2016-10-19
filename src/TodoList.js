@@ -1,5 +1,5 @@
-const React = require('react');
-const Todo = require('./Todo.js');
+import React from 'react';
+import Todo from './Todo';
 
 const TodoList = ({todos, check, remove}) => {
   const todoList = todos.map((todo) => {

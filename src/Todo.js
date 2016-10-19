@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 const Todo = ({todo, check, remove}) => (
   <li className='collection-item row'> 
