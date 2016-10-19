@@ -60,11 +60,15 @@
 
 	var _Title2 = _interopRequireDefault(_Title);
 
-	var _TodoForm = __webpack_require__(173);
+	var _TodoListForm = __webpack_require__(173);
 
-	var _TodoForm2 = _interopRequireDefault(_TodoForm);
+	var _TodoListForm2 = _interopRequireDefault(_TodoListForm);
 
-	var _TodoList = __webpack_require__(174);
+	var _TodoLists = __webpack_require__(174);
+
+	var _TodoLists2 = _interopRequireDefault(_TodoLists);
+
+	var _TodoList = __webpack_require__(175);
 
 	var _TodoList2 = _interopRequireDefault(_TodoList);
 
@@ -76,7 +80,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	window.id = 0;
+	window.listId = 0;
+	window.todoId = 0;
 
 	var App = function (_React$Component) {
 		_inherits(App, _React$Component);
@@ -94,40 +99,81 @@
 			};
 			return _this;
 		}
-		// add todo handler
+
+		// add list handler
 
 
 		_createClass(App, [{
-			key: 'addTodo',
-			value: function addTodo(value) {
-				var todo = { text: value, id: window.id++, checked: false };
-				// update data
-				this.state.data.push(todo);
+			key: 'addTodoList',
+			value: function addTodoList(value) {
+				// get data
+				var list = { name: value, listId: window.listId++, items: [] };
+				// update data with new list
+				this.state.data.push(list);
 				// update state
 				this.setState({ data: this.state.data });
 			}
+
+			// add todo handler
+
+		}, {
+			key: 'addTodo',
+			value: function addTodo(listId, value) {
+				// get data
+				var todo = { text: value, listId: listId, todoId: window.todoId++, checked: false };
+				this.state.data.forEach(function (list, i) {
+					// select proper list
+					if (list.listId === listId) {
+						// add new todo to that list
+						list.items.push(todo);
+					}
+				});
+				// update data
+				this.setState({ data: this.state.data });
+			}
+
 			// handle remove
 
 		}, {
 			key: 'removeTodo',
-			value: function removeTodo(id) {
-				// Filter all todos except the one to be removed
-				var remaining = this.state.data.filter(function (todo) {
-					if (todo.id !== id) return todo;
+			value: function removeTodo(listId, todoId) {
+				// get data
+				var data = this.state.data;
+				data.forEach(function (list, i) {
+					// select proper list
+					if (list.listId === listId) {
+						var updatedList = {
+							name: list.name,
+							listId: list.listId
+						};
+						// Filter all todos except the one to be removed for selected list
+						updatedList.items = list.items.filter(function (todo) {
+							if (todo.todoId !== todoId) return todo;
+						});
+						// replace old selected list with updated list
+						data[i] = updatedList;
+					}
 				});
 				// update state with filter
-				this.setState({ data: remaining });
+				this.setState({ data: data });
 			}
 		}, {
 			key: 'toggleChecked',
-			value: function toggleChecked(id) {
-				// update data
-				var todos = this.state.data;
-				todos.map(function (todo) {
-					if (todo.id === id) todo.checked = !todo.checked;
-					return todo;
+			value: function toggleChecked(listId, todoId) {
+				// get data
+				var data = this.state.data;
+				data.forEach(function (list) {
+					// select proper list
+					if (list.listId === listId) {
+						list.items.map(function (todo) {
+							// update selected todo in selected list
+							if (todo.todoId === todoId) todo.checked = !todo.checked;
+							return todo;
+						});
+					}
 				});
-				this.setState({ data: todos });
+				// update data
+				this.setState({ data: data });
 			}
 		}, {
 			key: 'render',
@@ -136,11 +182,12 @@
 					'div',
 					null,
 					_react2.default.createElement(_Title2.default, null),
-					_react2.default.createElement(_TodoForm2.default, { addTodo: this.addTodo.bind(this) }),
-					_react2.default.createElement(_TodoList2.default, {
-						todos: this.state.data,
+					_react2.default.createElement(_TodoListForm2.default, { addTodoList: this.addTodoList.bind(this) }),
+					_react2.default.createElement(_TodoLists2.default, {
+						todoLists: this.state.data,
 						remove: this.removeTodo.bind(this),
-						check: this.toggleChecked.bind(this)
+						check: this.toggleChecked.bind(this),
+						addTodo: this.addTodo.bind(this)
 					})
 				);
 			}
@@ -21573,8 +21620,8 @@
 	    { className: "row" },
 	    _react2.default.createElement(
 	      "h2",
-	      { className: "col s12" },
-	      "Todo List Name"
+	      { className: "col s12 title" },
+	      "So Many Things... So Little Time..."
 	    )
 	  );
 	};
@@ -21593,8 +21640,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var TodoForm = function TodoForm(_ref) {
-		var addTodo = _ref.addTodo;
+	var TodoListForm = function TodoListForm(_ref) {
+		var addTodoList = _ref.addTodoList;
 
 		var input = void 0;
 		return _react2.default.createElement(
@@ -21602,17 +21649,17 @@
 			{ className: "row" },
 			_react2.default.createElement(
 				"div",
-				{ className: "col s11" },
+				{ className: "col s11 todo-list-form" },
 				_react2.default.createElement("input", {
-					id: "text",
+					id: "name",
 					type: "text",
-					placeholder: "Things to do.....",
+					placeholder: "New List.....",
 					ref: function ref(node) {
 						input = node;
 					},
 					onKeyUp: function onKeyUp(e) {
 						if (e.keyCode === 13) {
-							addTodo(input.value);
+							addTodoList(input.value);
 							input.value = "";
 						}
 					} })
@@ -21623,11 +21670,11 @@
 				_react2.default.createElement(
 					"button",
 					{
-						id: "submit_todo",
+						id: "submit_todo_list",
 						type: "submit",
 						className: "btn-floating btn waves-effect waves-light right green darken-4",
 						onClick: function onClick() {
-							addTodo(input.value);
+							addTodoList(input.value);
 							input.value = "";
 						} },
 					_react2.default.createElement(
@@ -21640,7 +21687,7 @@
 		);
 	};
 
-	module.exports = TodoForm;
+	module.exports = TodoListForm;
 
 /***/ },
 /* 174 */
@@ -21652,39 +21699,81 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Todo = __webpack_require__(175);
+	var _TodoList = __webpack_require__(175);
+
+	var _TodoList2 = _interopRequireDefault(_TodoList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoLists = function TodoLists(_ref) {
+	  var todoLists = _ref.todoLists;
+	  var check = _ref.check;
+	  var remove = _ref.remove;
+	  var addTodo = _ref.addTodo;
+
+	  var todoListArr = todoLists.map(function (todoList) {
+	    return _react2.default.createElement(_TodoList2.default, { todoList: todoList, key: todoList.listId, remove: remove, check: check, addTodo: addTodo });
+	  });
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'row' },
+	    todoListArr
+	  );
+	};
+
+	module.exports = TodoLists;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _TodoForm = __webpack_require__(176);
+
+	var _TodoForm2 = _interopRequireDefault(_TodoForm);
+
+	var _Todo = __webpack_require__(177);
 
 	var _Todo2 = _interopRequireDefault(_Todo);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TodoList = function TodoList(_ref) {
-	  var todos = _ref.todos;
+	  var todoList = _ref.todoList;
 	  var check = _ref.check;
 	  var remove = _ref.remove;
+	  var addTodo = _ref.addTodo;
 
-	  var todoList = todos.map(function (todo) {
+	  var todos = todoList.items;
+	  var pendingList = todos.map(function (todo) {
 	    if (!todo.checked) {
-	      return _react2.default.createElement(_Todo2.default, { todo: todo, key: todo.id, remove: remove, check: check });
+	      return _react2.default.createElement(_Todo2.default, { todo: todo, key: todo.todoId, listId: todoList.listId, remove: remove, check: check });
 	    }
 	  });
 	  var doneList = todos.map(function (todo) {
 	    if (todo.checked) {
-	      return _react2.default.createElement(_Todo2.default, { todo: todo, key: todo.id, remove: remove, check: check });
+	      return _react2.default.createElement(_Todo2.default, { todo: todo, key: todo.todoId, listId: todoList.listId, remove: remove, check: check });
 	    }
 	  });
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'row' },
+	    { className: 'col s12 m6 l4' },
 	    _react2.default.createElement(
-	      'div',
-	      { className: 'col s12' },
-	      _react2.default.createElement(
-	        'ul',
-	        { className: 'collection' },
-	        todoList,
-	        doneList
-	      )
+	      'h3',
+	      null,
+	      todoList.name
+	    ),
+	    _react2.default.createElement(
+	      'ul',
+	      { className: 'collection' },
+	      pendingList,
+	      doneList,
+	      _react2.default.createElement(_TodoForm2.default, { listId: todoList.listId, addTodo: addTodo })
 	    )
 	  );
 	};
@@ -21692,7 +21781,64 @@
 	module.exports = TodoList;
 
 /***/ },
-/* 175 */
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var TodoForm = function TodoForm(_ref) {
+		var listId = _ref.listId;
+		var addTodo = _ref.addTodo;
+
+		var input = void 0;
+		return _react2.default.createElement(
+			'li',
+			{ className: 'collection-item row todo-form' },
+			_react2.default.createElement('input', {
+				type: 'text',
+				className: 'col s10',
+				placeholder: 'Things to do.....',
+				ref: function ref(node) {
+					input = node;
+				},
+				onKeyUp: function onKeyUp(e) {
+					if (e.keyCode === 13) {
+						addTodo(listId, input.value);
+						input.value = "";
+					}
+				} }),
+			_react2.default.createElement(
+				'span',
+				{ className: 'col s2' },
+				_react2.default.createElement(
+					'button',
+					{
+						type: 'submit',
+						className: 'btn-floating btn waves-effect waves-light right light-green accent-4 submit_todo',
+						onClick: function onClick() {
+							addTodo(listId, input.value);
+							input.value = "";
+						} },
+					_react2.default.createElement(
+						'i',
+						{ className: 'material-icons right' },
+						'add'
+					)
+				)
+			)
+		);
+	};
+
+	module.exports = TodoForm;
+
+/***/ },
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21712,9 +21858,9 @@
 	    { className: 'collection-item row' },
 	    _react2.default.createElement(
 	      'span',
-	      { className: 'col s1',
+	      { className: 'col s2',
 	        onClick: function onClick() {
-	          check(todo.id);
+	          check(todo.listId, todo.todoId);
 	        } },
 	      _react2.default.createElement(
 	        'i',
@@ -21724,18 +21870,18 @@
 	    ),
 	    _react2.default.createElement(
 	      'span',
-	      { className: 'col s10 push' },
+	      { className: 'col s8' },
 	      todo.text
 	    ),
 	    _react2.default.createElement(
 	      'span',
-	      { className: 'col s1' },
+	      { className: 'col s2' },
 	      _react2.default.createElement(
 	        'button',
 	        {
 	          className: 'btn-floating btn waves-effect waves-light right right red darken-4',
 	          onClick: function onClick() {
-	            remove(todo.id);
+	            remove(todo.listId, todo.todoId);
 	          } },
 	        _react2.default.createElement(
 	          'i',
