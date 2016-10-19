@@ -48,17 +48,34 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _Title = __webpack_require__(172);
+
+	var _Title2 = _interopRequireDefault(_Title);
+
+	var _TodoForm = __webpack_require__(173);
+
+	var _TodoForm2 = _interopRequireDefault(_TodoForm);
+
+	var _TodoList = __webpack_require__(174);
+
+	var _TodoList2 = _interopRequireDefault(_TodoList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(34);
-	var Title = __webpack_require__(172);
-	var TodoForm = __webpack_require__(173);
-	var TodoList = __webpack_require__(174);
 	window.id = 0;
 
 	var App = function (_React$Component) {
@@ -115,12 +132,12 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				return React.createElement(
+				return _react2.default.createElement(
 					'div',
 					null,
-					React.createElement(Title, null),
-					React.createElement(TodoForm, { addTodo: this.addTodo.bind(this) }),
-					React.createElement(TodoList, {
+					_react2.default.createElement(_Title2.default, null),
+					_react2.default.createElement(_TodoForm2.default, { addTodo: this.addTodo.bind(this) }),
+					_react2.default.createElement(_TodoList2.default, {
 						todos: this.state.data,
 						remove: this.removeTodo.bind(this),
 						check: this.toggleChecked.bind(this)
@@ -130,11 +147,11 @@
 		}]);
 
 		return App;
-	}(React.Component);
+	}(_react2.default.Component);
 
 	;
 
-	ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21544,13 +21561,17 @@
 
 	"use strict";
 
-	var React = __webpack_require__(1);
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Title = function Title() {
-	  return React.createElement(
+	  return _react2.default.createElement(
 	    "div",
 	    { className: "row" },
-	    React.createElement(
+	    _react2.default.createElement(
 	      "h2",
 	      { className: "col s12" },
 	      "Todo List Name"
@@ -21566,19 +21587,23 @@
 
 	"use strict";
 
-	var React = __webpack_require__(1);
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TodoForm = function TodoForm(_ref) {
 		var addTodo = _ref.addTodo;
 
 		var input = void 0;
-		return React.createElement(
+		return _react2.default.createElement(
 			"div",
 			{ className: "row" },
-			React.createElement(
+			_react2.default.createElement(
 				"div",
 				{ className: "col s11" },
-				React.createElement("input", {
+				_react2.default.createElement("input", {
 					id: "text",
 					type: "text",
 					placeholder: "Things to do.....",
@@ -21592,10 +21617,10 @@
 						}
 					} })
 			),
-			React.createElement(
+			_react2.default.createElement(
 				"div",
 				{ className: "col s1" },
-				React.createElement(
+				_react2.default.createElement(
 					"button",
 					{
 						id: "submit_todo",
@@ -21605,7 +21630,7 @@
 							addTodo(input.value);
 							input.value = "";
 						} },
-					React.createElement(
+					_react2.default.createElement(
 						"i",
 						{ className: "material-icons right" },
 						"add"
@@ -21623,8 +21648,15 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Todo = __webpack_require__(175);
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Todo = __webpack_require__(175);
+
+	var _Todo2 = _interopRequireDefault(_Todo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var TodoList = function TodoList(_ref) {
 	  var todos = _ref.todos;
@@ -21633,21 +21665,21 @@
 
 	  var todoList = todos.map(function (todo) {
 	    if (!todo.checked) {
-	      return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove, check: check });
+	      return _react2.default.createElement(_Todo2.default, { todo: todo, key: todo.id, remove: remove, check: check });
 	    }
 	  });
 	  var doneList = todos.map(function (todo) {
 	    if (todo.checked) {
-	      return React.createElement(Todo, { todo: todo, key: todo.id, remove: remove, check: check });
+	      return _react2.default.createElement(_Todo2.default, { todo: todo, key: todo.id, remove: remove, check: check });
 	    }
 	  });
-	  return React.createElement(
+	  return _react2.default.createElement(
 	    'div',
 	    { className: 'row' },
-	    React.createElement(
+	    _react2.default.createElement(
 	      'div',
 	      { className: 'col s12' },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'ul',
 	        { className: 'collection' },
 	        todoList,
@@ -21665,43 +21697,47 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Todo = function Todo(_ref) {
 	  var todo = _ref.todo;
 	  var check = _ref.check;
 	  var remove = _ref.remove;
-	  return React.createElement(
+	  return _react2.default.createElement(
 	    'li',
 	    { className: 'collection-item row' },
-	    React.createElement(
+	    _react2.default.createElement(
 	      'span',
 	      { className: 'col s1',
 	        onClick: function onClick() {
 	          check(todo.id);
 	        } },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'i',
 	        { className: 'material-icons left' },
 	        todo.checked ? "done" : "check_box_outline_blank"
 	      )
 	    ),
-	    React.createElement(
+	    _react2.default.createElement(
 	      'span',
 	      { className: 'col s10 push' },
 	      todo.text
 	    ),
-	    React.createElement(
+	    _react2.default.createElement(
 	      'span',
 	      { className: 'col s1' },
-	      React.createElement(
+	      _react2.default.createElement(
 	        'button',
 	        {
 	          className: 'btn-floating btn waves-effect waves-light right right red darken-4',
 	          onClick: function onClick() {
 	            remove(todo.id);
 	          } },
-	        React.createElement(
+	        _react2.default.createElement(
 	          'i',
 	          { className: 'material-icons' },
 	          'clear'
