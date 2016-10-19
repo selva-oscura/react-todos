@@ -1,37 +1,34 @@
 import React from 'react';
 
-const TodoForm = ({addTodo}) => {
+const TodoForm = ({listId, addTodo}) => {
 	let input;
 	return (
-		<div className="row">
-			<div className="col s11">
-				<input 
-					id="text" 
-					type="text" 
-					placeholder="Things to do....." 
-					ref={node => {input = node;}} 
-					onKeyUp={(e) => {
-						if(e.keyCode===13){
-							addTodo(input.value);
-							input.value = "";
-						}
+		<li className='collection-item row todo-form'> 
+			<input 
+				type="text" 
+				className="col s10"
+				placeholder="Things to do....." 
+				ref={node => {input = node;}} 
+				onKeyUp={(e) => {
+					if(e.keyCode===13){
+						addTodo(listId, input.value);
+						input.value = "";
 					}
-				}/>
-			</div>
-			<div className="col s1">
+				}
+			}/>
+			<span className="col s2">
 				<button 
-					id="submit_todo" 
 					type="submit" 
-					className="btn-floating btn waves-effect waves-light right green darken-4" 
+					className="btn-floating btn waves-effect waves-light right light-green accent-4 submit_todo" 
 					onClick={() => {
-						addTodo(input.value);
+						addTodo(listId, input.value);
 						input.value = "";
 					}
 				}>
 					<i className="material-icons right">add</i>
 				</button>
-			</div>
-		</div>
+			</span>
+		</li>
 	);
 }
 
