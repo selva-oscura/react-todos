@@ -1,8 +1,8 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Title = require('./Title.js');
-const TodoForm = require('./TodoForm.js');
-const TodoList = require('./TodoList');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Title from './Title';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
 window.id = 0;
 
 
