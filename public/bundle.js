@@ -21621,7 +21621,13 @@
 	    _react2.default.createElement(
 	      "h2",
 	      { className: "col s12 title" },
-	      "So Many Things... So Little Time..."
+	      "So Many Things... ",
+	      _react2.default.createElement("br", null),
+	      _react2.default.createElement(
+	        "span",
+	        { className: "right-aligned" },
+	        "So Little Time..."
+	      )
 	    )
 	  );
 	};
@@ -21858,20 +21864,20 @@
 	    { className: 'collection-item row' },
 	    _react2.default.createElement(
 	      'span',
-	      { className: 'col s2',
-	        onClick: function onClick() {
-	          check(todo.listId, todo.todoId);
-	        } },
+	      { className: 'col s10' },
 	      _react2.default.createElement(
 	        'i',
-	        { className: 'material-icons left' },
+	        { className: 'material-icons left',
+	          onClick: function onClick() {
+	            check(todo.listId, todo.todoId);
+	          } },
 	        todo.checked ? "done" : "check_box_outline_blank"
+	      ),
+	      _react2.default.createElement(
+	        'span',
+	        { className: todo.checked ? "checked" : null },
+	        todo.text
 	      )
-	    ),
-	    _react2.default.createElement(
-	      'span',
-	      { className: 'col s8' },
-	      todo.text
 	    ),
 	    _react2.default.createElement(
 	      'span',
