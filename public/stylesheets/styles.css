@@ -20,3 +20,8 @@
 .collection .collection-item {
   padding: 10px 0px 10px 10px;
 }
+
+.checked{
+	text-decoration: line-through;
+	opacity: .50;
+}
