@@ -21625,7 +21625,7 @@
 	      _react2.default.createElement("br", null),
 	      _react2.default.createElement(
 	        "span",
-	        { className: "right-aligned" },
+	        { className: "right" },
 	        "So Little Time..."
 	      )
 	    )
